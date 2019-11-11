@@ -3,17 +3,23 @@ import 'dart:io';
 
 
 class FileUtil {
-  static String filePath =
-    r"/Users/ironman/Desktop/model/";
+  //在使用前请配置文件存储路径
+  static String filePath;
   final File file;
   final String fileName;
+  //这里配置署名
+  String _headerStr = '/*\n * Author: Bangjin Yu\n * CreateTime: ${DateTime.now()}\n * Email: 1227169416@qq.com\n * Address: 梦想小镇互联网村\n */\n';
   String _keyValue = '';
-  String _headerStr = '/**\n * Author: Bangjin Yu\n * CreateTime: ${DateTime.now()}\n * Email: 1227169416@qq.com\n * Address: 梦想小镇互联网村\n */\n';
   List _arrEnd = [];
 
   FileUtil(this.file, this.fileName);
 
+  ///fileName:文件名“_”请使用“.”来代替 例如:flutter_text -> flutter.text  
+  ///生成 flutter_text_model.dart 文件 和 flutterTextModel 类
   factory FileUtil.fromFileName(String fileName) {
+    if (filePath == null) {
+      throw ('请配置创建文件路径');
+    }
     fileName = fileName.replaceAll('.', '_');
     return FileUtil(File(filePath + fileName + '_model.dart'), fileName);
   }

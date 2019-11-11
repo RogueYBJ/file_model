@@ -1,5 +1,6 @@
 # file_model
 file_model
+目前只能在模拟器上使用，手机上需要获取手机的读写权限，
 导入file_model
 ```
 file_model: 
