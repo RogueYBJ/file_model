@@ -5,7 +5,7 @@ file_model
 ```
 file_model: 
     git: 
-	path: https://github.com/RogueYBJ/file_model.git
+	url: https://github.com/RogueYBJ/file_model.git
 ```
 引入
 ```

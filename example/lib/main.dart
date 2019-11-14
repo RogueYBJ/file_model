@@ -66,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _counter++;
       FileUtil.filePath = r"/Users/ironman/Documents/flutter/package/file_model/example/lib/model/";
-      FileUtil.fromFileName('flutter.text').writeAsMap({'name':'yubangjin','age':25,'height':178.5});
+      FileUtil.fromFileName('flutter.data').writeAsMap({'name':'yubangjin','age':25,'height':178.5,'list':[{'name':'yubangjin','age':25,'height':178.5},{'name':'yubangjin','age':25,'height':178.5}]});
     });
   }
 

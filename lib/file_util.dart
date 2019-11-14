@@ -68,7 +68,7 @@ class FileUtil {
     _keyValue = '';
     data.forEach((k,v){
       filed += '\tfinal ${_getFiledName(v,k)} $k; \n';
-      methods+= 'this.$k = ${_initData(v)},';
+      methods+= 'this.$k${_initData(v)}';
     });
     methods += '});\n';
     return filed + methods;
@@ -89,19 +89,19 @@ class FileUtil {
 
   ///初始化赋值
   String _initData(value){
-    String data = '\'\'';
+    String data = ' = \'\',';
     if (value is String) {
-      data = '\'\'';
+      data = ' = \'\',';
     }else if (value is int) {
-      data = '0';
+      data = ' = 0,';
     }else if (value is double) { 
-      data = '0.0';
+      data = ' = 0.0,';
     }else if (value is bool) {
-      data = 'false';
+      data = ' = false,';
     }else if (value is Map) {
-      data = '{}';
+      data = ',';
     }else if (value is List) {
-      data = '[]';
+      data = ',';
     }
     return data;
   }
@@ -128,10 +128,10 @@ class FileUtil {
       fileUtil.writeAsMap(value);
     }else if (value is List) {
       className = 'List';
-      FileUtil fileUtil = FileUtil.fromFileName(fileName + '_$k');      
+      FileUtil fileUtil = FileUtil.fromFileName(fileName + '_$k');
       _headerStr += 'import \'${fileUtil.fileName}_model.dart\';\n';
       fileUtil.writeAsMap(value[0]);
-      _arrEnd.add('\t$className<${fileUtil._getClassName()}> get${fileUtil._getClassName()}(){\n\t\t$className list = [];\n\t\tfor(Map map in this.list){\n\t\t\tlist.add(${fileUtil._getClassName()}.fromMap(map));\n\t\t}\n\t\treturn list;\n\t}\n');
+      _arrEnd.add('\t$className<${fileUtil._getClassName()}> get${fileUtil._getClassName()}(){\n\t\t$className<${fileUtil._getClassName()}> list = [];\n\t\tfor(Map map in this.list){\n\t\t\tlist.add(${fileUtil._getClassName()}.fromMap(map));\n\t\t}\n\t\treturn list;\n\t}\n');
     }
     _keyValue += key_value;
     return className;
