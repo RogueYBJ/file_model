@@ -131,7 +131,7 @@ class FileUtil {
       FileUtil fileUtil = FileUtil.fromFileName(fileName + '_$k');
       _headerStr += 'import \'${fileUtil.fileName}_model.dart\';\n';
       fileUtil.writeAsMap(value[0]);
-      _arrEnd.add('\t$className<${fileUtil._getClassName()}> get${fileUtil._getClassName()}(){\n\t\t$className<${fileUtil._getClassName()}> list = [];\n\t\tfor(Map map in this.list){\n\t\t\tlist.add(${fileUtil._getClassName()}.fromMap(map));\n\t\t}\n\t\treturn list;\n\t}\n');
+      _arrEnd.add('\t$className<${fileUtil._getClassName()}> get${fileUtil._getClassName()}(){\n\t\t$className<${fileUtil._getClassName()}> list = [];\n\t\tfor(Map map in this.$k){\n\t\t\tlist.add(${fileUtil._getClassName()}.fromMap(map));\n\t\t}\n\t\treturn list;\n\t}\n');
     }
     _keyValue += key_value;
     return className;
