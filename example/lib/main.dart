@@ -7,6 +7,7 @@
  */
 
 
+import 'package:example/model/flutter_data_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:file_model/file_model.dart';
@@ -65,8 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      FileUtil.filePath = r"/Users/ironman/Documents/flutter/package/file_model/example/lib/model/";
-      FileUtil.fromFileName('flutter.data').writeAsMap({'name':'yubangjin','age':25,'height':178.5,'list':[{'name':'yubangjin','age':25,'height':178.5},{'name':'yubangjin','age':25,'height':178.5}]});
+      // FileUtil.filePath = r"/Users/ironman/Documents/flutter/package/file_model/example/lib/model/";
+      // FileUtil.fromFileName('flutter.data').writeAsMap({'name':'yubangjin','age':25,'height':178.5,'list':[{'name':'yubangjin','age':25,'height':178.5},{'name':'yubangjin','age':25,'height':178.5}],'map':{'name':'yubangjin','age':25,'height':178.5}});
+      Map data = FlutterDataModel.fromMap({'name':'yubangjin','age':25,'height':178.5,'list':[{'name':'yubangjin','age':25,'height':178.5},{'name':'yubangjin','age':25,'height':178.5}],'map':{'name':'yubangjin','age':25,'height':178.5}}).toMap();
+      print(data);
     });
   }
 

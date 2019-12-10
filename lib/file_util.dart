@@ -17,6 +17,7 @@ class FileUtil {
   //这里配置署名
   String _headerStr = '/*\n * Author: Bangjin Yu\n * CreateTime: ${DateTime.now()}\n * Email: 1227169416@qq.com\n * Address: 梦想小镇互联网村\n */\n';
   String _keyValue = '';
+  String _toMap = '';
   List _arrEnd = [];
 
   FileUtil(this.file, this.fileName);
@@ -49,10 +50,17 @@ class FileUtil {
     string += 'class ${_getClassName()} {\n';
     string += _getFiledMethods(data);
     string += _getFactoryMethods(data);
+    string += _getToMapMethods();
     for (String text in _arrEnd) {
       string += text;
     }
     return _headerStr + string +'\n}';
+  }
+
+  ///toMap方法
+  String _getToMapMethods(){
+    String toMap = '\tMap toMap(){\n\t\treturn {$_toMap};\n\t}\n';
+    return toMap;
   }
 
   ///工厂方法
@@ -66,6 +74,7 @@ class FileUtil {
     String filed = '';
     String methods = '\t' + _getClassName() + '({';
     _keyValue = '';
+    _toMap = '';
     data.forEach((k,v){
       filed += '\tfinal ${_getFiledName(v,k)} $k; \n';
       methods+= 'this.$k${_initData(v)}';
@@ -110,6 +119,7 @@ class FileUtil {
   String _getFiledName(value,k) {
     String className = 'String';
     String key_value = '$k:data[\'$k\'],';
+    String to_map = '\'$k\':$k,';
     
     if (value is String) {
       className = 'String';
@@ -125,6 +135,7 @@ class FileUtil {
       _headerStr += 'import \'${fileUtil.fileName}_model.dart\';\n';
       className = fileUtil._getClassName();
       key_value = '$k:$className.fromMap(data[\'$k\']),';
+      to_map = '\'$k\':$k.toMap(),';
       fileUtil.writeAsMap(value);
     }else if (value is List) {
       className = 'List';
@@ -134,6 +145,7 @@ class FileUtil {
       _arrEnd.add('\t$className<${fileUtil._getClassName()}> get${fileUtil._getClassName()}(){\n\t\t$className<${fileUtil._getClassName()}> list = [];\n\t\tfor(Map map in this.$k){\n\t\t\tlist.add(${fileUtil._getClassName()}.fromMap(map));\n\t\t}\n\t\treturn list;\n\t}\n');
     }
     _keyValue += key_value;
+    _toMap += to_map;
     return className;
   }
 }
